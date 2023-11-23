@@ -12,25 +12,34 @@
             return $blog['user_id'] === $_SESSION['active_user'];
         });
     }
-    if(isset($_POST['like_submit'])){
+    if(isset($_POST['like-submit'])){
         try{
-            blog_like($_POST['blog_id_like']);
+            $response = blog_like($_POST['blog_id_like']);
+            if($response = 'liked'){
+                header('Location: index.php');
+            }
         }
         catch(Exception $e){
             $error = $e;
         }
     }
-    if(isset($_POST['unlike_submit'])){
+    if(isset($_POST['unlike-submit'])){
         try{
-            blog_unlike($_POST['blog_id_unlike']);
+            $response = blog_unlike($_POST['blog_id_unlike']);
+            if($response = 'unliked'){
+                header('Location: index.php');
+            }
         }
         catch(Exception $e){
             $error = $e;
         }
     }
-    if(isset($_POST['delete_submit'])){
+    if(isset($_POST['delete-submit'])){
         try{
-            blog_delete($_POST['blog_id_delete']);
+            $response = blog_delete($_POST['blog_id_delete']);
+            if($response = 'deleted'){
+                header('Location: index.php');
+            }
         }
         catch(Exception $e){
             $error = $e;
